@@ -35,7 +35,7 @@ $routes->setDefaultMethod('index');
 //Common Routes
 $routes->get('/', 'Welcome::index');
 $routes->post('GetLogin', 'Welcome::index');
-$routes->get('/logout','Welcome::logout');
+$routes->get('/logout', 'Welcome::logout');
 
 $routes->get('register', 'Welcome::register');
 $routes->post('register', 'Welcome::registration');

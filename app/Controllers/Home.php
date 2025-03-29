@@ -8,10 +8,21 @@ class Home extends BaseController
 {
 	public function index()
 	{ 
-		$user = $this->userModel->getUser('',$_SESSION['user_id']); 
+		if (!isset($_SESSION['user_id'])) {
+			// Redirect to login page or show an error
+			return redirect()->to(base_url('login'))->with('notif_error', 'You must be logged in to access this page.');
+		}
+		$user = $this->userModel->getUser('', $_SESSION['user_id']);
 
 		helper('form');
-		$data = ['first_name'=>$user['first_name'],'last_name'=>$user['last_name'],'email'=>$user['email'],'mobile_number'=>$user['mobile_number'],'mail_status'=>$user['mail_status'],'role'=>$user['role']];
+		$data = [
+			'first_name' => $user['first_name'],
+			'last_name' => $user['last_name'],
+			'email' => $user['email'],
+			'mobile_number' => $user['mobile_number'],
+			'mail_status' => $user['mail_status'],
+			'role' => $user['role']
+		];
 		
 		return view('common/home', $data);
 	}
